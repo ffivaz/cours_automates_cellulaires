@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.brand-logo {
+    margin-left: 30px;
+}
+
+.collection {
+    margin-top: 30px;
+}
+
+nav {
+    background-color: #9ccc65;
+}
+
+footer.page-footer {
+    background-color: #9ccc65;
+}
+
+.nav-button {
+    margin-top: 50px;
+}
+
+.btn {
+    background-color: #9ccc65;
+}
+
+.btn:hover {
+    background-color: #558b2f;
+}
+
+.collection .collection-item.active {
+    background-color: #9ccc65;
+}
+
+.collection a.collection-item {
+    color: #558b2f;
+}
