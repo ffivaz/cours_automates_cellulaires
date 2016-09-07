@@ -1,45 +1,60 @@
 body {
-    display: flex;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #000;
+}
+
+.bar {
+    position: fixed;
+    background-color: #2e6da4;
+    height: 10px;
+    width: 100%;
+}
+
+.title {
+    color: #fff;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 15em;
+}
+
+.title h1 {
+    font-size: 72px;
+}
+
+.page {
+    background-color: #2e6da4;
+    width:100%;
+    height: 90vh;
+    display: table;
+    position: relative;
+    z-index: 10;
+}
+
+#intro {
+    margin-top: 10vh;
+}
+
+.main {
     min-height: 100vh;
-    flex-direction: column;
 }
 
-main {
-    flex: 1 0 auto;
+.main h1 {
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 1em;
 }
 
-.brand-logo {
-    margin-left: 30px;
+.main h2 {
+    text-align: center;
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-top: 1em;
 }
 
-.collection {
-    margin-top: 30px;
+.btn-big-top-margin {
+    margin: 3em;
 }
 
-nav {
-    background-color: #9ccc65;
-}
-
-footer.page-footer {
-    background-color: #9ccc65;
-}
-
-.nav-button {
-    margin-top: 50px;
-}
-
-.btn {
-    background-color: #9ccc65;
-}
-
-.btn:hover {
-    background-color: #558b2f;
-}
-
-.collection .collection-item.active {
-    background-color: #9ccc65;
-}
-
-.collection a.collection-item {
-    color: #558b2f;
+p {
+    font-size: 20px;
 }
