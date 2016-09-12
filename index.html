@@ -13,6 +13,7 @@
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/terra.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -24,6 +25,7 @@
             });
         });
     </script>
+
 
 </head>
 <body>
@@ -43,11 +45,22 @@
     <div class="row main">
         <h2>Introduction</h2>
         <h1>Déroulement du cours</h1>
-        <p>Les <b>automates cellulaires</b> que nous allons voir aujourd'hui n'ont pas véritablement d'utilité, ce n'est donc pas véritablement un cours que je vous donne ici, mais une manière <b>ludique</b> d'aborder ces êtres digitaux. Prenez le temps de sortir du cadre pour essayer les automates et détendez-vous pendant une heure.</p>
-        <p>Contrairement à d'autres formations en ligne, je n'ai pas fait appel à des vidéos. C'est un excellent média pour la formation, mais il demande du matériel, des logiciels et surtout du temps pour que la qualité soit au rendez-vous.</p>
-        <p>Une partie des automates cellulaires que vous testerez s'ouvriront sur une autre page (ou un autre onglet) de votre navigateur. Celà vous permet de suivre le cours tout en faisant les exercices à côté.</p>
-        <p>Quelques remerciements s'imposent : aux personnes qui organisent le festival de la formation. Et à quelques informaticiens qui sont passés par la programmation d'automates cellulaires avant moi, et qui ont mis leur travail à disposition : Riley Shaw pour <a href="http://rileyjshaw.com/terra" target="_blank">terra.js</a> et XXX pour son <a href="" target="_blank">implémentation</a> du jeu de la vie.</p>
-        <p><b>Pendant toute la journée du 16 septembre 2016, entre 9h et 16h, je serai accessible pour des questions via email (<a href="mailto:fabien.fivaz@unine.ch">fabien.fivaz@unine.ch</a>) ou via twitter (<a href="https://twitter.com/ffivaz">@ffivaz</a>).</b></p>
+        <p>Les <b>automates cellulaires</b> que nous allons voir aujourd'hui n'ont pas véritablement d'utilité, ce n'est
+            donc pas véritablement un cours que je vous donne ici, mais une manière <b>ludique</b> d'aborder ces êtres
+            digitaux. Prenez le temps de sortir du cadre pour essayer les automates et détendez-vous pendant une heure.
+        </p>
+        <p>Contrairement à d'autres formations en ligne, je n'ai pas fait appel à des vidéos. C'est un excellent média
+            pour la formation, mais il demande du matériel, des logiciels et surtout du temps pour que la qualité soit
+            au rendez-vous.</p>
+        <p>Une partie des automates cellulaires que vous testerez s'ouvriront sur une autre page (ou un autre onglet) de
+            votre navigateur. Celà vous permet de suivre le cours tout en faisant les exercices à côté.</p>
+        <p>Quelques remerciements s'imposent : aux personnes qui organisent le festival de la formation. Et à quelques
+            informaticiens qui sont passés par la programmation d'automates cellulaires avant moi, et qui ont mis leur
+            travail à disposition : Riley Shaw pour <a href="http://rileyjshaw.com/terra" target="_blank">terra.js</a>
+            et XXX pour son <a href="" target="_blank">implémentation</a> du jeu de la vie.</p>
+        <p><b>Pendant toute la journée du 16 septembre 2016, entre 9h et 16h, je serai accessible pour des questions via
+            email (<a href="mailto:fabien.fivaz@unine.ch">fabien.fivaz@unine.ch</a>) ou via twitter (<a
+                    href="https://twitter.com/ffivaz">@ffivaz</a>).</b></p>
         <div class="text-center">
             <a href="#page1" class="btn btn-danger btn-big-top-margin">Commencer le cours</a>
         </div>
@@ -58,9 +71,117 @@
     <div class="row main">
         <h2>Introduction</h2>
         <h1>Un automate cellulaire ?</h1>
-        <p>Prenez une feuille quadrillée. Chaque carré (qu'on appelera un <b>pixel</b> par la suite) peut avoir plusieurs états. Pour simplifier, prenons-en deux : noir ou blanc. Au temps t=0</p>
+        <p>Prenez une feuille quadrillée, qu'on appelera <b>canevas</b>. Chaque carré - qu'on appelera un <b>pixel</b>
+            - peut avoir plusieurs états. Pour simplifier, prenons-en deux: noir ou blanc. Au temps
+            t<sub>0</sub>, au début donc, la feuille est couverte d'un certain nombre de pixels noirs (1) et de pixels
+            blancs (0). Ce sont les <b>conditions initiales</b>.</p>
+        <p>Le canevas peut même être plus simple encore: une ligne. L'état initial est donné ci-dessous. Comme nous verrons, nous allons créer une nouvelle ligne à chaque génération. La deuxième ligne correspondra donc à la première génération, ou à la première fois où nous appliquons nos règles à la situation initiale.</p>
+        <p class="text-center">
+            <canvas id="demo1" width="450" height="50"></canvas>
+        </p>
+        <script>
+            // Simple 1D cellular automata
+
+            var myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            var oneD = function (initial) {
+                this.cells = initial;
+
+                this.draw = function (ctx, generation) {
+                    var i = 0;
+                    this.cells.forEach(function (pixel) {
+                        if (pixel == 0) {
+                            ctx.strokeStyle = 'black';
+                            ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                        } else {
+                            ctx.strokeStyle = 'black';
+                            ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                            ctx.fillStyle = 'black';
+                            ctx.fillRect(i * 20 + 0.5, 20.5, 17, 17);
+                        }
+                        i++;
+                    });
+                }
+            };
+
+            demo1 = oneD(myCells);
+
+            var canvas = document.getElementById('demo1');
+            var ctx = canvas.getContext("2d");
+
+            demo1.draw(ctx);
+
+        </script>
+        <p>Les <b>règles</b> fixent la manière dont le système évolue d'une génération à l'autre. Dans les automates cellulaires, pour qu'il y a une <b>intéraction</b> entre les pixels, l'état d'un pixel ne dépend souvent pas seulement de sont propre état à la génération précédente, mais de celui de ses <b>voisins</b>.</p>
+
         <div class="text-center">
-            <a href="#page1" class="btn btn-danger btn-big-top-margin">Commencer le cours</a>
+            <a href="#page2" class="btn btn-danger btn-big-top-margin">Aller au quiz</a>
+        </div>
+    </div>
+</div>
+
+<div id="page2" class="container">
+    <div class="row main">
+        <h2>Introduction</h2>
+        <h1>Quiz 1</h1>
+        <p>Reprenons notre ligne de pixels.</p>
+        <p class="text-center">
+            <canvas id="demo2" width="450" height="50"></canvas>
+        </p>
+        <script>
+            // Simple 1D cellular automata
+
+            var cells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            var canvas = document.getElementById('demo2');
+            var ctx = canvas.getContext("2d");
+
+            var i = 0;
+            var t = 0;
+
+            cells.forEach(function (pixel) {
+                if (pixel == 0) {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                } else {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(i * 20 + 0.5, 20.5, 17, 17);
+                }
+                i++;
+            });
+        </script>
+        <p>Ajoutons-y une nouvelle génération très simple.</p>
+        <p class="text-center">
+            <canvas id="demo3" width="450" height="50"></canvas>
+        </p>
+        <script>
+            // Simple 1D cellular automata
+
+            var cells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            var canvas = document.getElementById('demo3');
+            var ctx = canvas.getContext("2d");
+
+            var i = 0;
+            var t = 0;
+
+            cells.forEach(function (pixel) {
+                if (pixel == 0) {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                } else {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((i * 20) + 0.5, 20.5, 17, 17);
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(i * 20 + 0.5, 20.5, 17, 17);
+                }
+                i++;
+            });
+        </script>
+        <div class="text-center">
+            <a href="#page2" class="btn btn-danger btn-big-top-margin">Continuer</a>
         </div>
     </div>
 </div>
