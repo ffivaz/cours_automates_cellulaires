@@ -62,3 +62,12 @@ p, ul {
 .canvas-frame {
     margin-top: 20px;
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-items {
+    align-items: center;
+}
