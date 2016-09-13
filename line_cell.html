@@ -30,7 +30,7 @@
                         ctx.fillStyle = 'black';
                         ctx.fillRect(i * 20 + 0.5, (generation * 20) + 0.5, 17, 17);
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect((i * 20) + 0.5, + (generation * 20) + 0.5, 17, 17);
+                        ctx.strokeRect((i * 20) + 0.5, +(generation * 20) + 0.5, 17, 17);
                     }
                     i++;
                 });
@@ -46,19 +46,37 @@
         </div>
         <div class="col-md-3">
             <h3>Menu</h3>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                    style="margin: 20px;">Aide
+            </button>
             <div class="text-center" id="rules">
             </div>
             <div>
-                <button class="btn btn-danger" id="startBtn" style="margin: 40px;">Dessiner</button>
+                <button class="btn btn-danger" id="startBtn" style="margin: 20px;">Dessiner</button>
             </div>
         </div>
         <div class="col-md-8">
             <h3>Canvas</h3>
+            Zoom :
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="zoom1" autocomplete="off" checked> 1x
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="zoom2" autocomplete="off"> 2x
+                </label>
+            </div>
             <canvas id="canvas" width="800" height="600"></canvas>
         </div>
     </div>
 </div>
 <script>
+
+    $('#zoom1').on('click', function () {
+    });
+
+    $('#zoom2').on('click', function () {
+    });
 
     var myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -176,12 +194,12 @@
         var calcNG = function (init) {
             var nextGen = [];
             nextGen.push(0);
-            for (var i = 1; i < init.length-1; i++) {
+            for (var i = 1; i < init.length - 1; i++) {
                 var a = init[i - 1];
                 var b = init[i];
                 var c = init[i + 1];
                 myRules.forEach(function (element) {
-                    if ([a,b,c].equals(element.a)) {
+                    if ([a, b, c].equals(element.a)) {
                         nextGen.push(element.b);
                     }
                 });
@@ -200,6 +218,26 @@
     });
 
 </script>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Aide</h4>
+            </div>
+            <div class="modal-body">
+                <p>Dans le menu, vous pouvez changer la couleur du pixel de la génération suivante, pour chacun des
+                    triplets. Lorsque vous avez fait vos choix, vous pouvez dessiner le résultat en choisissant le
+                    bouton "Dessiner". Vous pouvez ensuite changer les paramètres et redessiner un nouvel automate.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 </body>
 </html>
