@@ -13,6 +13,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/rules.js"></script>
 
     <script>
         var oneD = function (initial, ratio) {
@@ -23,14 +24,14 @@
                 this.cells.forEach(function (pixel) {
                     if (pixel == 0) {
                         ctx.fillStyle = 'white';
-                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
+                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17 * ratio));
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
+                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17 * ratio));
                     } else {
                         ctx.fillStyle = 'black';
-                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
+                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17 * ratio));
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
+                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17 * ratio));
                     }
                     i++;
                 });
@@ -42,10 +43,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Automates cellulaires simples - demo</h1>
+            <h2>Automates cellulaires simples - demo</h2>
         </div>
         <div class="col-md-3">
-            <h3>Menu</h3>
+            <h4>Menu</h4>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
                     style="margin: 20px;">Aide
             </button>
@@ -56,56 +57,28 @@
             </div>
         </div>
         <div class="col-md-8">
-            <h3>Canvas</h3>
+            <h4>Canvas</h4>
             Zoom :
             <div class="btn-group" data-toggle="buttons" style="margin-bottom: 20px;">
                 <button class="btn btn-primary active" id="zoom1">1x</button>
                 <button class="btn btn-primary" id="zoom2">2x</button>
             </div>
-            <canvas id="canvas" width="800" height="600"></canvas>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            Ligne initiale :
+            <div class="btn-group" data-toggle="buttons" style="margin-bottom: 20px;">
+                <button class="btn btn-primary active" id="init1">standard</button>
+                <button class="btn btn-primary" id="init2">aléatoire</button>
+            </div>
+
+            <canvas id="canvas" width="800" height="500"></canvas>
+            <div>
+                <b>Note</b>: On observe des "effets de bord" dans ces visualisations. Les pixels qui bordent le canevas
+                à droite et à gauche ne sont jamais modifiés (parce qu'ils n'ont pas deux voisins comme les autres).
+            </div>
         </div>
     </div>
 </div>
 <script>
-
-    var t = 55;
-    var ratio = 0.5;
-    var myCells = [];
-
-    for (var i=1; i<=73;i++) {
-        if (i == 37) {
-            myCells.push(1);
-        } else {
-            myCells.push(0);
-        }
-    }
-
-    var z1 = document.getElementById('zoom1');
-    var z2 = document.getElementById('zoom2');
-
-    z1.addEventListener('click', function () {
-        t = 55;
-        ratio = 0.5;
-        z1.className += ' active';
-        z2.className = 'btn btn-primary';
-        for (var i=1; i<=73;i++) {
-            if (i == 37) {
-                myCells.push(1);
-            } else {
-                myCells.push(0);
-            }
-        }
-    });
-
-    z2.addEventListener('click', function () {
-        t = 25;
-        ratio = 1;
-        z2.className += ' active';
-        z1.className = 'btn btn-primary';
-        myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    });
-
-
 
     var myRules = [
         {
@@ -149,6 +122,105 @@
             b: 0
         }
     ];
+
+    if (location.search != '') {
+        switch (location.search) {
+            case '?rule254':
+                myRules = rule254;
+                break;
+            case '?rule90':
+                myRules = rule90;
+                break;
+            case '?rule30':
+                myRules = rule30;
+                break;
+            case '?rule250':
+                myRules = rule250;
+                break;
+        }
+    }
+
+    var toggleStartBtn = function () {
+        var sbtn = document.getElementById('startBtn');
+        sbtn.removeAttribute('disabled');
+    };
+
+    var t = 55;
+    var ratio = 0.5;
+    var myCells = [];
+
+    for (var i = 1; i <= 73; i++) {
+        if (i == 37) {
+            myCells.push(1);
+        } else {
+            myCells.push(0);
+        }
+    }
+
+    var z1 = document.getElementById('zoom1');
+    var z2 = document.getElementById('zoom2');
+
+    z1.addEventListener('click', function () {
+        t = 55;
+        ratio = 0.5;
+        z1.className += ' active';
+        z2.className = 'btn btn-primary';
+        myCells = [];
+        for (var i = 1; i <= 73; i++) {
+            if (i == 37) {
+                myCells.push(1);
+            } else {
+                myCells.push(0);
+            }
+        }
+        toggleStartBtn();
+    });
+
+    z2.addEventListener('click', function () {
+        t = 25;
+        ratio = 1;
+        z2.className += ' active';
+        z1.className = 'btn btn-primary';
+        myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        toggleStartBtn();
+    });
+
+    var i1 = document.getElementById('init1');
+    var i2 = document.getElementById('init2');
+
+    i1.addEventListener('click', function () {
+        i1.className += ' active';
+        i2.className = 'btn btn-primary';
+        myCells = [];
+        if (t == 55) {
+            for (var i = 1; i <= 73; i++) {
+                if (i == 37) {
+                    myCells.push(1);
+                } else {
+                    myCells.push(0);
+                }
+            }
+        } else {
+            myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        }
+        toggleStartBtn();
+    });
+
+    i2.addEventListener('click', function () {
+        i2.className += ' active';
+        i1.className = 'btn btn-primary';
+        myCells = [];
+        if (t == 55) {
+            for (var i = 1; i <= 73; i++) {
+                myCells.push(Math.round(Math.random()));
+            }
+        } else {
+            for (var i = 1; i <= 37; i++) {
+                myCells.push(Math.round(Math.random()));
+            }
+        }
+        toggleStartBtn();
+    });
 
     var eDraw = function (e) {
         var myRule = e.a;
@@ -202,11 +274,14 @@
                 element.b = 1;
                 eDraw(element);
             }
+            toggleStartBtn();
         });
     });
 
     document.getElementById('startBtn').addEventListener('click', function () {
 
+        var sbtn = document.getElementById('startBtn');
+        sbtn.setAttribute('disabled', 'disabled');
         var demo6 = new oneD(myCells, ratio);
 
         var canvas = document.getElementById('canvas');
@@ -241,6 +316,9 @@
         }
     });
 
+    document.getElementById('startBtn').click();
+
+
 </script>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -252,9 +330,16 @@
                 <h4 class="modal-title">Aide</h4>
             </div>
             <div class="modal-body">
-                <p>Dans le menu, vous pouvez changer la couleur du pixel de la génération suivante, pour chacun des
-                    triplets. Lorsque vous avez fait vos choix, vous pouvez dessiner le résultat en choisissant le
+                <p>Dans le menu, en cliquant sur les boutons oranges, vous pouvez changer la couleur du pixel de la
+                    génération suivante, pour chacun des
+                    triplets. Lorsque vous avez fait vos choix, vous pouvez afficher le résultat en choisissant le
                     bouton "Dessiner". Vous pouvez ensuite changer les paramètres et redessiner un nouvel automate.</p>
+                <p>Pour changer l'échelle, utilisez le zoom 1x (petits pixels) ou 2x (grands pixels), vous devez
+                    également redessiner le canevas.</p>
+                <p>Pour changer la ligne initiale, utilisez les boutons "standard" (une ligne de pixels blancs avec un
+                    pixel noir au centre) ou "aléatoire" (chaque élément de la ligne initiale est choisi au hasard).
+                    Pour changer la ligne en mode aléatoire, recliquez simplement sur "aléatoire". N'oubliez pas de
+                    recliquez sur "Dessiner" pour afficher le résultat.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

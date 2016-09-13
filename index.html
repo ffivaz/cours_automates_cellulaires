@@ -64,7 +64,7 @@
         <h2>Introduction</h2>
         <h1>Déroulement du cours</h1>
         <p>Les <b>automates cellulaires</b> que nous allons voir aujourd'hui n'ont pas véritablement d'utilité, ce n'est
-            donc pas véritablement un cours que je vous donne ici, mais une manière <b>ludique</b> d'aborder ces êtres
+            donc pas véritablement une formation que vous allez suivre, mais une manière <b>ludique</b> d'aborder ces êtres
             digitaux. Prenez le temps de sortir du cadre pour essayer les automates et détendez-vous pendant une heure.
         </p>
         <p>Contrairement à d'autres formations en ligne, je n'ai pas fait appel à des vidéos. C'est un excellent média
@@ -88,13 +88,10 @@
 <div id="page1" class="container">
     <div class="row main">
         <h2>Les bases</h2>
-        <h1>Un automate cellulaire ?</h1>
+        <h1>Un automate cellulaire simple</h1>
         <p>Prenez une feuille quadrillée, qu'on appelera <b>canevas</b>. Chaque carré - qu'on appelera un <b>pixel</b>
-            - peut avoir plusieurs états. Pour simplifier, prenons-en deux: noir ou blanc. Au temps
-            t<sub>0</sub>, au début donc, la feuille est couverte d'un certain nombre de pixels noirs (1) et de pixels
-            blancs (0). Ce sont les <b>conditions initiales</b>.</p>
-        <p>Le canevas peut même être plus simple encore: une ligne. L'état initial est donné ci-dessous. Comme nous
-            verrons, nous allons créer une nouvelle ligne à chaque génération. La deuxième ligne correspondra donc à la
+            - peut avoir plusieurs <b>états</b>. Pour simplifier, prenons-en deux: noir ou blanc. La première ligne de la feuille correspond à la situation initiale ou <b>génération</b> initiale t<sub>0</sub>.</p>
+        <p>A chaque pas, ou chaque génération, nous allons remplir une nouvelle ligne qui dépend de la ligne en dessus. La deuxième ligne correspondra donc à la
             première génération, ou à la première fois où nous appliquons nos règles à la situation initiale.</p>
         <p class="text-center canvas-frame">
             <canvas id="demo1" width="450" height="20"></canvas>
@@ -537,6 +534,16 @@
         <p class="text-center canvas-frame">
             <a href="line_cell.html" target="_blank"> >> Cliquez ici pour accéder au bac à sable << </a>
         </p>
+        <p class="hidden" id="texteCache">Etes-vous sûrs d'avoir essayé toutes les combinaisons possibles? Wolfram (2002) a identifié 256 possibilités qu'il a appelée "règles" (<i>rules</i> en anglais). Dans son livre "A New Kind of Science", Wolfram fait le constat suivant: la <a href="line_cell.html?rule254" target="_blank">règle 254</a> est très simple. Elle est répétitive, comme également la <a href="line_cell.html?rule250" target="_blank">règle 250</a>. La <a href="line_cell.html?rule90" target="_blank">règle 90</a> que nous avons vu précédemment, est déjà plus complexe, on voit se dessiner un motif fractal. D'autres règles, comme la <a href="line_cell.html?rule30" target="_blank">30</a> donne l'impression de dessiner des motifs aléatoires.</p>
+        <div class="text-center">
+            <button class="btn btn-danger btn-big-top-margin" id="areYouSure">Continuer</button>
+        </div>
+        <script>
+            var ays = document.getElementById('areYouSure');
+            ays.addEventListener('click', function () {
+                document.getElementById('texteCache').className = '';
+            });
+        </script>
     </div>
 </div>
 
