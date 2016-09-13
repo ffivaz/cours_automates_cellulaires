@@ -42,9 +42,9 @@
         <div class="col-md-12">
             <h1>Automates cellulaires simples - demo</h1>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <h3>Menu</h3>
-            <div class="text-center" id="rules" class="flex-container">
+            <div class="text-center" id="rules">
             </div>
         </div>
         <div class="col-md-8">
@@ -58,34 +58,42 @@
 
     var myRules = [
         {
+            n: 'rule1',
             a: [1, 1, 1],
             b: 0
         },
         {
+            n: 'rule2',
             a: [1, 1, 0],
             b: 1
         },
         {
+            n: 'rule3',
             a: [1, 0, 1],
             b: 0
         },
         {
+            n: 'rule4',
             a: [1, 0, 0],
             b: 1
         },
         {
+            n: 'rule5',
             a: [0, 1, 1],
             b: 1
         },
         {
+            n: 'rule6',
             a: [0, 1, 0],
             b: 0
         },
         {
+            n: 'rule7',
             a: [0, 0, 1],
             b: 1
         },
         {
+            n: 'rule8',
             a: [0, 0, 0],
             b: 0
         }
@@ -94,9 +102,31 @@
     var i = 1;
 
     myRules.forEach(function (element) {
-        //var d = document.createElement('div');
-        //d.className += ' flex-items';
-        //document.getElementById('rules').appendChild(d);
+
+        var eDraw = function (e) {
+            var myRule = e.a;
+            var myTarget = e.b;
+
+            var canvas = document.getElementById(e.n);
+            var ctx = canvas.getContext("2d");
+            var rule = new oneD(myRule);
+            rule.draw(ctx, 0);
+            if (myTarget == 1) {
+                ctx.strokeStyle = 'black';
+                ctx.strokeRect(20.5, 20.5, 17, 17);
+                ctx.fillStyle = 'black';
+                ctx.fillRect(20.5, 20.5, 17, 17);
+            } else {
+                ctx.strokeStyle = 'black';
+                ctx.strokeRect(20.5, 20.5, 17, 17);
+                ctx.fillStyle = 'white';
+                ctx.fillRect(20.5, 20.5, 17, 17);
+            }
+        };
+
+        var d = document.createElement('div');
+        d.className += ' flex-container';
+        document.getElementById('rules').appendChild(d);
 
         var e = document.createElement('canvas');
         e.width = "60";
@@ -104,31 +134,28 @@
         e.style.padding = '5px';
         e.style.margin = '5px';
         e.style.border = '1px solid black';
-        e.id = "rule" + i;
-        e.className += ' flex-items';
-        document.getElementById('rules').appendChild(e);
+        e.id = element.n;
+        e.className += 'flex-items';
+        d.appendChild(e);
+
+        eDraw(element);
 
         var s = document.createElement('button');
-        s.innerHTML = "change";
-        s.className += " btn btn-warning flex-items";
-        document.getElementById('rules').appendChild(s);
+        s.innerHTML = "changer";
+        s.style.height = '20px;'
+        s.className += "btn btn-warning flex-items";
+        s.id = 'ruleBtn' + i;
+        d.appendChild(s);
+        s.addEventListener('click', function (e) {
+            if (element.b == 1) {
+                element.b = 0;
+                eDraw(element);
+            } else {
+                element.b = 1;
+                eDraw(element);
+            }
+        });
 
-        var myRule = element.a;
-        var myTarget = element.b;
-
-        var canvas = document.getElementById('rule' + i);
-        var ctx = canvas.getContext("2d");
-        var rule = new oneD(myRule);
-        rule.draw(ctx, 0);
-        if (myTarget == 1) {
-            ctx.strokeStyle = 'black';
-            ctx.strokeRect((1 * 20) + 0.5, 20.5, 17, 17);
-            ctx.fillStyle = 'black';
-            ctx.fillRect(1 * 20 + 0.5, 20.5, 17, 17);
-        } else {
-            ctx.strokeStyle = 'black';
-            ctx.strokeRect((1 * 20) + 0.5, 20.5, 17, 17);
-        }
         i++;
     });
 
