@@ -15,7 +15,7 @@
     <script src="js/functions.js"></script>
 
     <script>
-        var oneD = function (initial) {
+        var oneD = function (initial, ratio) {
             this.cells = initial;
 
             this.draw = function (ctx, generation) {
@@ -23,14 +23,14 @@
                 this.cells.forEach(function (pixel) {
                     if (pixel == 0) {
                         ctx.fillStyle = 'white';
-                        ctx.fillRect(i * 20 + 0.5, (generation * 20) + 0.5, 17, 17);
+                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect((i * 20) + 0.5, (generation * 20) + 0.5, 17, 17);
+                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
                     } else {
                         ctx.fillStyle = 'black';
-                        ctx.fillRect(i * 20 + 0.5, (generation * 20) + 0.5, 17, 17);
+                        ctx.fillRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect((i * 20) + 0.5, +(generation * 20) + 0.5, 17, 17);
+                        ctx.strokeRect(Math.floor(i * 20 * ratio) + 0.5, Math.floor(generation * 20 * ratio) + 0.5, Math.floor(17 * ratio), Math.floor(17* ratio));
                     }
                     i++;
                 });
@@ -58,13 +58,9 @@
         <div class="col-md-8">
             <h3>Canvas</h3>
             Zoom :
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="zoom1" autocomplete="off" checked> 1x
-                </label>
-                <label class="btn btn-primary">
-                    <input type="radio" name="options" id="zoom2" autocomplete="off"> 2x
-                </label>
+            <div class="btn-group" data-toggle="buttons" style="margin-bottom: 20px;">
+                <button class="btn btn-primary active" id="zoom1">1x</button>
+                <button class="btn btn-primary" id="zoom2">2x</button>
             </div>
             <canvas id="canvas" width="800" height="600"></canvas>
         </div>
@@ -72,13 +68,44 @@
 </div>
 <script>
 
-    $('#zoom1').on('click', function () {
+    var t = 55;
+    var ratio = 0.5;
+    var myCells = [];
+
+    for (var i=1; i<=73;i++) {
+        if (i == 37) {
+            myCells.push(1);
+        } else {
+            myCells.push(0);
+        }
+    }
+
+    var z1 = document.getElementById('zoom1');
+    var z2 = document.getElementById('zoom2');
+
+    z1.addEventListener('click', function () {
+        t = 55;
+        ratio = 0.5;
+        z1.className += ' active';
+        z2.className = 'btn btn-primary';
+        for (var i=1; i<=73;i++) {
+            if (i == 37) {
+                myCells.push(1);
+            } else {
+                myCells.push(0);
+            }
+        }
     });
 
-    $('#zoom2').on('click', function () {
+    z2.addEventListener('click', function () {
+        t = 25;
+        ratio = 1;
+        z2.className += ' active';
+        z1.className = 'btn btn-primary';
+        myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     });
 
-    var myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
     var myRules = [
         {
@@ -129,7 +156,7 @@
 
         var canvas = document.getElementById(e.n);
         var ctx = canvas.getContext("2d");
-        var rule = new oneD(myRule);
+        var rule = new oneD(myRule, 1);
         rule.draw(ctx, 0);
         if (myTarget == 1) {
             ctx.fillStyle = 'black';
@@ -180,16 +207,13 @@
 
     document.getElementById('startBtn').addEventListener('click', function () {
 
-        var demo6 = new oneD(myCells);
+        var demo6 = new oneD(myCells, ratio);
 
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         demo6.draw(ctx, 0);
-
-        var t = 30;
-
-        console.log(myRules);
 
         var calcNG = function (init) {
             var nextGen = [];
@@ -208,11 +232,11 @@
             return nextGen;
         };
 
-        var demoX = new oneD(myNextGen = calcNG(myCells));
+        var demoX = new oneD(myNextGen = calcNG(myCells), ratio);
         demoX.draw(ctx, 1);
 
         for (var i = 2; i < t; i++) {
-            demoX = new oneD(myNextGen = calcNG(myNextGen));
+            demoX = new oneD(myNextGen = calcNG(myNextGen), ratio);
             demoX.draw(ctx, i);
         }
     });
