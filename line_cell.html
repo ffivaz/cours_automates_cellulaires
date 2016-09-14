@@ -137,6 +137,9 @@
             case '?rule250':
                 myRules = rule250;
                 break;
+            case '?rule184&alea':
+                myRules = rule184;
+                break;
         }
     }
 
@@ -315,6 +318,10 @@
             demoX.draw(ctx, i);
         }
     });
+
+    if (location.search == '?rule184&alea') {
+        i2.click();
+    }
 
     document.getElementById('startBtn').click();
 

@@ -36,7 +36,7 @@
                         ctx.strokeRect((i * 20) + 0.5, (generation * 20) + 0.5, 17, 17);
                     } else {
                         ctx.strokeStyle = 'black';
-                        ctx.strokeRect((i * 20) + 0.5, + (generation * 20) + 0.5, 17, 17);
+                        ctx.strokeRect((i * 20) + 0.5, +(generation * 20) + 0.5, 17, 17);
                         ctx.fillStyle = 'black';
                         ctx.fillRect(i * 20 + 0.5, (generation * 20) + 0.5, 17, 17);
                     }
@@ -64,7 +64,8 @@
         <h2>Introduction</h2>
         <h1>Déroulement du cours</h1>
         <p>Les <b>automates cellulaires</b> que nous allons voir aujourd'hui n'ont pas véritablement d'utilité, ce n'est
-            donc pas véritablement une formation que vous allez suivre, mais une manière <b>ludique</b> d'aborder ces êtres
+            donc pas véritablement une formation que vous allez suivre, mais une manière <b>ludique</b> d'aborder ces
+            êtres
             digitaux. Prenez le temps de sortir du cadre pour essayer les automates et détendez-vous pendant une heure.
         </p>
         <p>Contrairement à d'autres formations en ligne, je n'ai pas fait appel à des vidéos. C'est un excellent média
@@ -72,10 +73,9 @@
             au rendez-vous.</p>
         <p>Une partie des automates cellulaires que vous testerez s'ouvriront sur une autre page (ou un autre onglet) de
             votre navigateur. Celà vous permet de suivre le cours tout en faisant les exercices à côté.</p>
-        <p>Quelques remerciements s'imposent : aux personnes qui organisent le festival de la formation. Et à quelques
-            informaticiens qui sont passés par la programmation d'automates cellulaires avant moi, et qui ont mis leur
-            travail à disposition : Riley Shaw pour <a href="http://rileyjshaw.com/terra" target="_blank">terra.js</a>
-            et XXX pour son <a href="" target="_blank">implémentation</a> du jeu de la vie.</p>
+        <p>Quelques remerciements s'imposent : aux personnes qui organisent le festival de la formation. Et à Pedro
+            Verruma pour son <a href="http://pmav.eu/stuff/javascript-game-of-life-v3.1.1/">implémentation</a> du jeu de
+            la vie que vous utiliserez dans une partie du cours.</p>
         <p><b>Pendant toute la journée du 16 septembre 2016, entre 9h et 16h, je serai accessible pour des questions via
             email (<a href="mailto:fabien.fivaz@unine.ch">fabien.fivaz@unine.ch</a>) ou via twitter (<a
                     href="https://twitter.com/ffivaz">@ffivaz</a>).</b></p>
@@ -90,8 +90,10 @@
         <h2>Les bases</h2>
         <h1>Un automate cellulaire simple</h1>
         <p>Prenez une feuille quadrillée, qu'on appelera <b>canevas</b>. Chaque carré - qu'on appelera un <b>pixel</b>
-            - peut avoir plusieurs <b>états</b>. Pour simplifier, prenons-en deux: noir ou blanc. La première ligne de la feuille correspond à la situation initiale ou <b>génération</b> initiale t<sub>0</sub>.</p>
-        <p>A chaque pas, ou chaque génération, nous allons remplir une nouvelle ligne qui dépend de la ligne en dessus. La deuxième ligne correspondra donc à la
+            - peut avoir plusieurs <b>états</b>. Pour simplifier, prenons-en deux: noir ou blanc. La première ligne de
+            la feuille correspond à la situation initiale ou <b>génération</b> initiale t<sub>0</sub>.</p>
+        <p>A chaque pas, ou chaque génération, nous allons remplir une nouvelle ligne qui dépend de la ligne en dessus.
+            La deuxième ligne correspondra donc à la
             première génération, ou à la première fois où nous appliquons nos règles à la situation initiale.</p>
         <p class="text-center canvas-frame">
             <canvas id="demo1" width="450" height="20"></canvas>
@@ -194,10 +196,14 @@
         <p>Pour qu'un automate soit "cellulaire", il faut que les pixels <b>intéragissent</b> entre eux. Nous allons
             maintenant définir des règles plus complexes. A chaque génération, chaque pixel dépendra de sont état à la
             génération précédente et de celui de son voisin de gauche, et de droite.</p>
-        <p>Une manière simple de noter les règles est représentée ci-dessous. Pour couvrir toutes les permutations possibles pour trois pixels pouvant chacun prendre deux formes, il y a 8 possibilités. Donc par exemple pour le premier cadran, si les trois pixels de la génération t<sub>1</sub> sont noirs, le pixel observé - celui du centre - sera noir à la génération t<sub>2</sub>.</p>
+        <p>Une manière simple de noter les règles est représentée ci-dessous. Pour couvrir toutes les permutations
+            possibles pour trois pixels pouvant chacun prendre deux formes, il y a 8 possibilités. Donc par exemple pour
+            le premier cadran, si les trois pixels de la génération t<sub>1</sub> sont noirs, le pixel observé - celui
+            du centre - sera noir à la génération t<sub>2</sub>.</p>
         <p id="ruleGroup1" class="text-center" style="margin-top: 30px;">
         </p>
-        <p>Il reste ensuite à déplacer sur la ligne un cadre imaginaire de 3 pixels et de reporter la valeur du code ci-dessus pour connaître la génération suivante.</p>
+        <p>Il reste ensuite à déplacer sur la ligne un cadre imaginaire de 3 pixels et de reporter la valeur du code
+            ci-dessus pour connaître la génération suivante.</p>
         <script>
             var myRules = [
                 {
@@ -372,12 +378,12 @@
             var calcNG = function (init) {
                 var nextGen = [];
                 nextGen.push(0);
-                for (var i = 1; i < init.length-1; i++) {
+                for (var i = 1; i < init.length - 1; i++) {
                     var a = init[i - 1];
                     var b = init[i];
                     var c = init[i + 1];
                     myRules.forEach(function (element) {
-                        if ([a,b,c].equals(element.a)) {
+                        if ([a, b, c].equals(element.a)) {
                             nextGen.push(element.b);
                         }
                     });
@@ -395,7 +401,8 @@
             }
 
         </script>
-        <p>Voilà donc notre premier automate cellulaire. Pour rappel, chaque ligne correspond à une génération. Selon la notation de Wolfram (2002), ce automate cellulaire est appelé <b>règle 254</b>.</p>
+        <p>Voilà donc notre premier automate cellulaire. Pour rappel, chaque ligne correspond à une génération. Selon la
+            notation de Wolfram (2002), ce automate cellulaire est appelé <b>règle 254</b>.</p>
         <div class="text-center">
             <a href="#page5" class="btn btn-danger btn-big-top-margin">Continuer</a>
         </div>
@@ -406,7 +413,8 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>Automate 2</h1>
-        <p>La situation initiale reste la même, mais les règles changent. Selon la notation de Wolfram (2002), il s'agit de la règle 90.</p>
+        <p>La situation initiale reste la même, mais les règles changent. Selon la notation de Wolfram (2002), il s'agit
+            de la règle 90.</p>
         <script>
 
             var myCells = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -496,12 +504,12 @@
             var calcNG = function (init) {
                 var nextGen = [];
                 nextGen.push(0);
-                for (var i = 1; i < init.length-1; i++) {
+                for (var i = 1; i < init.length - 1; i++) {
                     var a = init[i - 1];
                     var b = init[i];
                     var c = init[i + 1];
                     myRules.forEach(function (element) {
-                        if ([a,b,c].equals(element.a)) {
+                        if ([a, b, c].equals(element.a)) {
                             nextGen.push(element.b);
                         }
                     });
@@ -519,7 +527,9 @@
             }
 
         </script>
-        <p>Celui-ci est intéressant. Il s'apparente à un motif <b>fractal</b>: les triangles se répètent lorsqu'on change d'échelle, <a href="https://commons.wikimedia.org/wiki/File:Sierpinski_triangle.svg" target="_blank">voyez ici</a>. C'est un triangle de Sierpinski.</p>
+        <p>Celui-ci est intéressant. Il s'apparente à un motif <b>fractal</b>: les triangles se répètent lorsqu'on
+            change d'échelle, <a href="https://commons.wikimedia.org/wiki/File:Sierpinski_triangle.svg" target="_blank">voyez
+                ici</a>. C'est un triangle de Sierpinski.</p>
         <div class="text-center">
             <a href="#page6" class="btn btn-danger btn-big-top-margin">Continuer</a>
         </div>
@@ -530,11 +540,25 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>A vous de jouer</h1>
-        <p>En cliquant sur le lien ci-dessous, vous allez accéder à une page externe qui vous permet de jouer avec les automates cellulaires simples que nous avons vus. N'hésitez pas à explorer par vous-mêmes avant de poursuivre. Les pages suivantes traiteront d'un certain nombre de propriétés des automates, avec à chaque fois les exemples dans la fenêtre externe. N'hésitez pas à passer de l'un à l'autre.</p>
+        <p>En cliquant sur le lien ci-dessous, vous allez accéder à une page externe qui vous permet de jouer avec les
+            automates cellulaires simples que nous avons vus. N'hésitez pas à explorer par vous-mêmes avant de
+            poursuivre. Les pages suivantes traiteront d'un certain nombre de propriétés des automates, avec à chaque
+            fois les exemples dans la fenêtre externe. N'hésitez pas à passer de l'un à l'autre.</p>
         <p class="text-center canvas-frame">
             <a href="line_cell.html" target="_blank"> >> Cliquez ici pour accéder au bac à sable << </a>
         </p>
-        <p class="hidden" id="texteCache">Etes-vous sûrs d'avoir essayé toutes les combinaisons possibles? Wolfram (2002) a identifié 256 possibilités qu'il a appelée "règles" (<i>rules</i> en anglais). Dans son livre "A New Kind of Science", Wolfram fait le constat suivant: la <a href="line_cell.html?rule254" target="_blank">règle 254</a> est très simple. Elle est répétitive, comme également la <a href="line_cell.html?rule250" target="_blank">règle 250</a>. La <a href="line_cell.html?rule90" target="_blank">règle 90</a> que nous avons vu précédemment, est déjà plus complexe, on voit se dessiner un motif fractal. D'autres règles, comme la <a href="line_cell.html?rule30" target="_blank">30</a> donne l'impression de dessiner des motifs aléatoires.</p>
+        <p class="hidden" id="texteCache">Etes-vous sûrs d'avoir essayé toutes les combinaisons possibles? Wolfram
+            (2002) a identifié 256 possibilités qu'il a appelée "règles" (<i>rules</i> en anglais). Dans son livre "A
+            New Kind of Science", Wolfram fait le constat suivant: la <a href="line_cell.html?rule254" target="_blank">règle
+                254</a> est très simple. Elle est répétitive, comme également la <a href="line_cell.html?rule250"
+                                                                                    target="_blank">règle 250</a>. La <a
+                    href="line_cell.html?rule90" target="_blank">règle 90</a> que nous avons vu précédemment, est déjà
+            plus complexe, on voit se dessiner un motif fractal. D'autres règles, comme la <a
+                    href="line_cell.html?rule30" target="_blank">30</a> donne l'impression de dessiner des motifs
+            aléatoires.</p>
+        <div class="text-center">
+            <a href="#page7" class="btn btn-danger btn-big-top-margin hidden" id="yesIAm">La suite</a>
+        </div>
         <div class="text-center">
             <button class="btn btn-danger btn-big-top-margin" id="areYouSure">Continuer</button>
         </div>
@@ -542,8 +566,21 @@
             var ays = document.getElementById('areYouSure');
             ays.addEventListener('click', function () {
                 document.getElementById('texteCache').className = '';
+                document.getElementById('yesIAm').className = 'btn btn-danger btn-big-top-margin';
+                document.getElementById('areYouSure').className += ' hidden';
             });
         </script>
+    </div>
+</div>
+
+<div class="container" id="page7">
+    <div class="row main">
+        <h2>Applications</h2>
+        <h1>Modéliser le trafic routier</h1>
+        <p>Lorsque j'ai dit que les automates cellulaires ne servaient à rien, je me suis un peu trop avancé. Plusieurs chercheurs les utilisent pour leur capacité d'abstraction. <b>Des règles simples peuvent conduire à des comportements complexes</b>. La simplicité des règles permet ainsi d'en étudier le fonctionnement. Prenons un exemple : le <b>trafic routier</b>.</p>
+        <p>L'automate <a href="line_cell.html?rule184&alea" target="_blank">simple numéro 184</a> peut être utilisé pour modéliser le trafic routier. Dans ce cas, un pixel noir est "occupé" par une voiture et un pixel blanc est libre.</p>
+        <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
+        <p>La première ligne correspond à la situation initiale. Les <a href="line_cell.html?rule184&alea" target="_blank">règles</a> sont simples: une voiture ne peut avancer que si la voie est libre devant elle. </q></p>
     </div>
 </div>
 
