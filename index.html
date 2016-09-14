@@ -633,6 +633,41 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>Quiz 2</h1>
+        <p>Et si les voitures se déplaçaient dans l'autre sens? Reprenez la <a href="http://localhost:63342/cours_automates_cellulaires/line_cell.html?rule184&alea" target="_blank">règle 184</a>. Essayez de modifier le jeu de règles pour que les voitures se déplacent dans le sens inverse (de la droite vers la gauche de l'écran).</p>
+        <h3>Question</h3>
+        <p>Les noirs sont des 1, les blancs des 0, quel est la combinaison qui inverse le sens?</p>
+        <ul>
+            <li>[1, 1, 1, 0, 0, 0, 1, 0] <input name="question2" value="r1" type="radio"></li>
+            <li>[0, 1, 1, 0, 0, 0, 1, 1] <input name="question2" value="r2" type="radio"></li>
+            <li>[0, 1, 0, 1, 0, 1, 0, 1] <input name="question2" value="r3"
+                                                                                       type="radio"></li>
+        </ul>
+        <div class="text-center">
+            <button class="btn btn-danger btn-big-top-margin" id="response2">Répondre</button>
+            <br>
+            <div class="reponse2 hidden"><br>
+                <a href="#page9" id="linkToPage9">Passons aux choses sérieuses</a>
+            </div>
+        </div>
+
+        <script>
+            $('#response2').click(function () {
+                if ($('input[name=question2]:checked').val() == 'r1') {
+                    $('#response2').html('C\'est juste!');
+                    $('#response2').removeClass('btn-danger').addClass('btn-success');
+                    $('.reponse2').removeClass('hidden');
+                } else {
+                    $('#response2').html('Essayez encore !');
+                }
+            });
+        </script>
+    </div>
+</div>
+
+<div class="container" id="page9">
+    <div class="row main">
+        <h2>Les bases</h2>
+        <h1>L'automate à deux dimensions</h1>
         <p></p>
     </div>
 </div>
