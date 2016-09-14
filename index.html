@@ -14,6 +14,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/terra.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/rules.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -577,10 +578,62 @@
     <div class="row main">
         <h2>Applications</h2>
         <h1>Modéliser le trafic routier</h1>
-        <p>Lorsque j'ai dit que les automates cellulaires ne servaient à rien, je me suis un peu trop avancé. Plusieurs chercheurs les utilisent pour leur capacité d'abstraction. <b>Des règles simples peuvent conduire à des comportements complexes</b>. La simplicité des règles permet ainsi d'en étudier le fonctionnement. Prenons un exemple : le <b>trafic routier</b>.</p>
-        <p>L'automate <a href="line_cell.html?rule184&alea" target="_blank">simple numéro 184</a> peut être utilisé pour modéliser le trafic routier. Dans ce cas, un pixel noir est "occupé" par une voiture et un pixel blanc est libre.</p>
+        <p>Lorsque j'ai dit que les automates cellulaires ne servaient à rien, je me suis un peu trop avancé. Plusieurs
+            chercheurs les utilisent pour leur capacité d'abstraction. <b>Des règles simples peuvent conduire à des
+                comportements complexes</b>. La simplicité des règles permet ainsi d'en étudier le fonctionnement.
+            Prenons un exemple : le <b>trafic routier</b>.</p>
+        <p>L'automate <a href="line_cell.html?rule184&alea" target="_blank">simple numéro 184</a> peut être utilisé pour
+            modéliser le trafic routier. Dans ce cas, un pixel noir est "occupé" par une voiture et un pixel blanc est
+            libre.</p>
         <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
-        <p>La première ligne correspond à la situation initiale. Les <a href="line_cell.html?rule184&alea" target="_blank">règles</a> sont simples: une voiture ne peut avancer que si la voie est libre devant elle. </q></p>
+        <p>La première ligne correspond à la situation initiale, ici aléatoire. Les règles sont simples:</p>
+        <div class="text-center" id="ruleGroup4"></div>
+        <script>
+            var myRules = rule184;
+
+            var i = 1;
+
+            myRules.forEach(function (element) {
+                var e = document.createElement('canvas');
+                e.width = "60";
+                e.height = "40";
+                e.style.padding = '5px';
+                e.style.margin = '5px';
+                e.style.border = '1px solid black';
+                e.id = "ruleC" + i;
+                document.getElementById('ruleGroup4').appendChild(e);
+                var myRule = element.a;
+                var myTarget = element.b;
+
+                var canvas = document.getElementById('ruleC' + i);
+                var ctx = canvas.getContext("2d");
+                var rule = new oneD(myRule);
+                rule.draw(ctx, 0);
+                if (myTarget == 1) {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((1 * 20) + 0.5, 20.5, 17, 17);
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(1 * 20 + 0.5, 20.5, 17, 17);
+                } else {
+                    ctx.strokeStyle = 'black';
+                    ctx.strokeRect((1 * 20) + 0.5, 20.5, 17, 17);
+                }
+                i++;
+            });
+        </script>
+        <p>Dans le 1er cadran, une voiture au centre ne peut bouger, elle a un véhicule devant elle. Dans le 2e cadran, elle se déplace et libère la place. Dans le 3e et le 4e, c'est la voiture de derrière qui prend sa place. Etc.</p>
+        <p>Malgré des règles basiques, des comportements que l'on observe dans le monde réel apparaîssent: des bouchons se forment et des tronçons de route reste libre. On peut pousser assez loin l'étude des embouteillage et du trafic en ville grâce à ce modèle. Si cet exercice sort du cadre de ce cours, vous pouvez par exemple consulter ce <a href="https://wireworld2014.wordpress.com/2014/03/17/un-exemple-dautomate-cellulaire-le-modele-de-nagel-schreckenberg/" target="_blank">court article</a> sur le sujet.</p>
+        <div class="text-center">
+            <a href="#page8" class="btn btn-danger btn-big-top-margin">Continuer</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="page8">
+    <div class="row main">
+        <h2>Les bases</h2>
+        <h1>Quiz 2</h1>
+        <p></p>
     </div>
 </div>
 

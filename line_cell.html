@@ -214,13 +214,21 @@
         i1.className = 'btn btn-primary';
         myCells = [];
         if (t == 55) {
-            for (var i = 1; i <= 73; i++) {
+            myCells.push(0);
+            var i = 0;
+            while (i < 72) {
                 myCells.push(Math.round(Math.random()));
+                i++;
             }
+            myCells.push(0);
         } else {
-            for (var i = 1; i <= 37; i++) {
+            myCells.push(0);
+            var i = 0;
+            while (i < 37) {
                 myCells.push(Math.round(Math.random()));
+                i++;
             }
+            myCells.push(0);
         }
         toggleStartBtn();
     });
