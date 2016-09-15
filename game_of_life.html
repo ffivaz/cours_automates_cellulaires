@@ -33,6 +33,14 @@
             <div class="text-center" id="rules">
             </div>
             <div>
+                <select id="patternList" title="Choix du motif de départ">
+                    <option name="glyder">glyder</option>
+                    <option name="random">random</option>
+                    <option name="blinker">blinker</option>
+                    <option name="acorn">acorn</option>
+                    <option name="eight-in-line">eight-in-line</option>
+                    <option name="toad">toad</option>
+                </select><br>
                 <button class="btn btn-success" id="startBtn" style="margin: 20px;">Start</button>
                 <br>
                 <button class="btn btn-warning" id="reset" style="margin: 20px;">Reset</button>
@@ -47,12 +55,12 @@
 <script>
 
     /**
-     * Creates an array fo arrays for the data
+     * Creates an array of arrays for the data
      **/
     var createArray = function () {
 
         /**
-         * Creates an array for the lines. Using a function is important to avoid linking the lines.
+         * Creates an array for the lines. Using a function is important to avoid linking the lines. I could have used slice(). Maybe.
          **/
         var createLine = function () {
             var someLine = [];
@@ -107,8 +115,7 @@
      * 2. Any live cell with two or three live neighbours lives on to the next generation.
      * 3. Any live cell with more than three live neighbours dies, as if by over-population.
      * 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-     **/
-
+     */
     var nextGen = function (cells) {
         var cellsCopy = arrayClone(cells);
         var a = 0;
@@ -133,6 +140,9 @@
         }
     };
 
+    /**
+     * This draws the initial board. Choose a type!
+     */
     var init = function (type) {
         switch (type) {
             case 'blinker':
@@ -174,6 +184,13 @@
                     }
                 }
                 break;
+            case 'glider':
+                myCells[19][34] = 1;
+                myCells[20][35] = 1;
+                myCells[20][36] = 1;
+                myCells[21][34] = 1;
+                myCells[21][35] = 1;
+                break;
         }
     };
 
@@ -190,7 +207,29 @@
     var ctx = canvas.getContext("2d");
 
     var myCells = createArray();
-    init('random');
+    var initPattern = 'glider';
+    switch (location.search) {
+        case '?glider':
+            initPattern = 'glider';
+            break;
+        case '?acorn':
+            initPattern = 'acorn';
+            break;
+        case '?random':
+            initPattern = 'random';
+            break;
+        case '?blinker':
+            initPattern = 'blinker';
+            break;
+        case '?toad':
+            initPattern = 'toad';
+            break;
+        case '?eight_in_line':
+            initPattern = 'eight_in_line';
+            break;
+    }
+
+    init(initPattern); // There you can choose the initial pattern: acorn, eight-in-line, blinker, etc.
 
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Flush canvas
     canvasDraw(myCells, ctx);
@@ -217,10 +256,12 @@
             document.getElementById('startBtn').className = 'btn btn-success';
         }
         myCells = createArray();
-        init('eight_in_line');
+        init(initPattern);
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Flush canvas
         canvasDraw(myCells, ctx);
     });
+
+    document.getElementById('startBtn').click();
 
 </script>
 
