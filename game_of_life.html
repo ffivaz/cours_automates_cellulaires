@@ -34,12 +34,14 @@
             </div>
             <div>
                 <select id="patternList" title="Choix du motif de départ">
+                    <option name="bloc">bloc</option>
                     <option name="glider">glider</option>
                     <option name="random">random</option>
                     <option name="blinker">blinker</option>
                     <option name="acorn">acorn</option>
                     <option name="eight-in-line">eight-in-line</option>
                     <option name="toad">toad</option>
+                    <option name="gosper-glider-gun">gosper-glider-gun</option>
                 </select>
                 <button class="btn btn-success" id="startBtn" style="margin: 20px;">Start</button>
                 <br>
@@ -150,6 +152,12 @@
                 myCells[20][36] = 1;
                 myCells[20][37] = 1;
                 break;
+            case 'bloc':
+                myCells[20][35] = 1;
+                myCells[21][35] = 1;
+                myCells[20][36] = 1;
+                myCells[21][36] = 1;
+                break;
             case 'toad':
                 myCells[20][35] = 1;
                 myCells[20][36] = 1;
@@ -191,6 +199,43 @@
                 myCells[21][34] = 1;
                 myCells[21][35] = 1;
                 break;
+            case 'gosper-glider-gun':
+                myCells[17][35] = 1;
+                myCells[18][33] = 1;
+                myCells[18][35] = 1;
+                myCells[19][23] = 1;
+                myCells[19][24] = 1;
+                myCells[19][31] = 1;
+                myCells[19][32] = 1;
+                myCells[19][45] = 1;
+                myCells[19][46] = 1;
+                myCells[20][22] = 1;
+                myCells[20][26] = 1;
+                myCells[20][31] = 1;
+                myCells[20][32] = 1;
+                myCells[20][45] = 1;
+                myCells[20][46] = 1;
+                myCells[21][11] = 1;
+                myCells[21][12] = 1;
+                myCells[21][21] = 1;
+                myCells[21][27] = 1;
+                myCells[21][31] = 1;
+                myCells[21][32] = 1;
+                myCells[22][11] = 1;
+                myCells[22][12] = 1;
+                myCells[22][21] = 1;
+                myCells[22][25] = 1;
+                myCells[22][27] = 1;
+                myCells[22][28] = 1;
+                myCells[22][33] = 1;
+                myCells[22][35] = 1;
+                myCells[23][21] = 1;
+                myCells[23][27] = 1;
+                myCells[23][35] = 1;
+                myCells[24][22] = 1;
+                myCells[24][26] = 1;
+                myCells[25][23] = 1;
+                myCells[25][24] = 1;
         }
     };
 
