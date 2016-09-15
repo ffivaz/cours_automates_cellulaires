@@ -556,7 +556,8 @@
                     href="line_cell.html?rule90" target="_blank">règle 90</a> que nous avons vu précédemment, est déjà
             plus complexe, on voit se dessiner un motif fractal. D'autres règles, comme la <a
                     href="line_cell.html?rule30" target="_blank">30</a> donne l'impression de dessiner des motifs
-            aléatoires. <b>C'est l'enseignement le plus important: des règles simples peuvent conduire à des comportements très complexes.</b></p>
+            aléatoires. <b>C'est l'enseignement le plus important: des règles simples peuvent conduire à des
+                comportements très complexes.</b></p>
         <div class="text-center">
             <a href="#page7" class="btn btn-danger btn-big-top-margin hidden" id="yesIAm">La suite</a>
         </div>
@@ -619,9 +620,16 @@
                 i++;
             });
         </script>
-        <p>Dans le 1er cadran, une voiture au centre ne peut bouger, elle a un véhicule devant elle. Dans le 2e cadran, elle se déplace et libère la place. Dans le 3e et le 4e, c'est la voiture de derrière qui prend sa place. Etc. Le résultat est étonnant.</p>
+        <p>Dans le 1er cadran, une voiture au centre ne peut bouger, elle a un véhicule devant elle. Dans le 2e cadran,
+            elle se déplace et libère la place. Dans le 3e et le 4e, c'est la voiture de derrière qui prend sa place.
+            Etc. Le résultat est étonnant.</p>
         <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
-        <p>Malgré des règles basiques, des comportements que l'on observe dans le monde réel apparaîssent: des bouchons se forment et des tronçons de route reste libre. On peut pousser assez loin l'étude des embouteillage et du trafic en ville grâce à ce modèle. Si cet exercice sort du cadre de ce cours, vous pouvez par exemple consulter ce <a href="https://wireworld2014.wordpress.com/2014/03/17/un-exemple-dautomate-cellulaire-le-modele-de-nagel-schreckenberg/" target="_blank">court article</a> sur le sujet.</p>
+        <p>Malgré des règles basiques, des comportements que l'on observe dans le monde réel apparaîssent: des bouchons
+            se forment et des tronçons de route reste libre. On peut pousser assez loin l'étude des embouteillage et du
+            trafic en ville grâce à ce modèle. Si cet exercice sort du cadre de ce cours, vous pouvez par exemple
+            consulter ce <a
+                    href="https://wireworld2014.wordpress.com/2014/03/17/un-exemple-dautomate-cellulaire-le-modele-de-nagel-schreckenberg/"
+                    target="_blank">court article</a> sur le sujet.</p>
         <div class="text-center">
             <a href="#page8" class="btn btn-danger btn-big-top-margin">Continuer</a>
         </div>
@@ -632,14 +640,17 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>Quiz 2</h1>
-        <p>Et si les voitures se déplaçaient dans l'autre sens? Reprenez la <a href="http://localhost:63342/cours_automates_cellulaires/line_cell.html?rule184&alea" target="_blank">règle 184</a>. Essayez de modifier le jeu de règles pour que les voitures se déplacent dans le sens inverse (de la droite vers la gauche de l'écran).</p>
+        <p>Et si les voitures se déplaçaient dans l'autre sens? Reprenez la <a
+                href="http://localhost:63342/cours_automates_cellulaires/line_cell.html?rule184&alea" target="_blank">règle
+            184</a>. Essayez de modifier le jeu de règles pour que les voitures se déplacent dans le sens inverse (de la
+            droite vers la gauche de l'écran).</p>
         <h3>Question</h3>
         <p>Les noirs sont des 1, les blancs des 0, quel est la combinaison qui inverse le sens?</p>
         <ul>
             <li>[1, 1, 1, 0, 0, 0, 1, 0] <input name="question2" value="r1" type="radio"></li>
             <li>[0, 1, 1, 0, 0, 0, 1, 1] <input name="question2" value="r2" type="radio"></li>
             <li>[0, 1, 0, 1, 0, 1, 0, 1] <input name="question2" value="r3"
-                                                                                       type="radio"></li>
+                                                type="radio"></li>
         </ul>
         <div class="text-center">
             <button class="btn btn-danger btn-big-top-margin" id="response2">Répondre</button>
@@ -667,9 +678,31 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>L'automate à deux dimensions</h1>
-        <p>Nous n'allons voir qu'une sorte d'automate à deux dimensions: celui qu'on trouve dans le "jeu de la vie" de Conway (<i>Game of Life</i>, 1970). Comme nous sommes dans un système à deux dimensions, l'état d'un pixel à la génération suivante ne dépend plus seulement de ses voisins de droite et de gauche, mais également ceux en dessus et en dessous de lui, et de leurs voisins de droite et de gauche.</p>
-        <p>La visualisation de cet automate n'est plus en ligne comme précédemment, mais se fait <i>en direct</i>. Les automates cellulaires deviennent ainsi vivants.</p>
-        <p></p>
+        <p>Nous n'allons voir qu'une sorte d'automate à deux dimensions: celui qu'on trouve dans le <b>jeu de la vie</b> de
+            Conway (<i>Game of Life</i>, vers 1970). Comme nous sommes dans un système à deux dimensions, l'état d'un pixel à
+            la génération suivante ne dépend plus seulement de ses voisins de droite et de gauche, mais également ceux
+            en dessus et en dessous de lui, et de leurs voisins de droite et de gauche.</p>
+        <p>La visualisation de cet automate n'est plus en ligne comme précédemment, mais se fait <i>en direct</i>. Les
+            automates cellulaires deviennent ainsi des <b>objets vivants</b>. Les pixels deviennent des <b>cellules</b>, qui peuvent être <b>vivantes</b> (1) ou <b>mortes</b> (0).</p>
+        <p>Les règles du jeu de la vie sont simples:</p>
+        <ul>
+            <li>Une cellule vivante, qui a moins de deux voisins, meurt (pour cause de sous-population).</li>
+            <li>Une cellule vivante, avec deux ou trois voisins, reste vivante.</li>
+            <li>Une cellule vivante, qui a plus de 3 voisins, meurt (pour cause de sur-population).</li>
+            <li>Une cellule morte, qui a exactement 3 voisins, devient vivante (reproduction).</li>
+        </ul>
+        <div class="text-center">
+            <a href="#page10" class="btn btn-danger btn-big-top-margin">Continuer</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="page10">
+    <div class="row main">
+        <h2>Les bases</h2>
+        <h1>A vous de jouer</h1>
+        <p>Comme pour les automates à une dimension, vous pouvez visualiser le <b>Jeu de la vie</b> dans une fenêtre ou un onglet externe:</p>
+        <p class="text-center"><a href="game_of_life.html" target="_blank"> >> Cliquez ici pour accéder au bac à sable << </a></p>
     </div>
 </div>
 
