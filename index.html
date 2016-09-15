@@ -89,7 +89,7 @@
 <div id="page1" class="container">
     <div class="row main">
         <h2>Les bases</h2>
-        <h1>Un automate cellulaire simple</h1>
+        <h1>L'automate à une dimension</h1>
         <p>Prenez une feuille quadrillée, qu'on appelera <b>canevas</b>. Chaque carré - qu'on appelera un <b>pixel</b>
             - peut avoir plusieurs <b>états</b>. Pour simplifier, prenons-en deux: noir ou blanc. La première ligne de
             la feuille correspond à la situation initiale ou <b>génération</b> initiale t<sub>0</sub>.</p>
@@ -556,7 +556,7 @@
                     href="line_cell.html?rule90" target="_blank">règle 90</a> que nous avons vu précédemment, est déjà
             plus complexe, on voit se dessiner un motif fractal. D'autres règles, comme la <a
                     href="line_cell.html?rule30" target="_blank">30</a> donne l'impression de dessiner des motifs
-            aléatoires.</p>
+            aléatoires. <b>C'est l'enseignement le plus important: des règles simples peuvent conduire à des comportements très complexes.</b></p>
         <div class="text-center">
             <a href="#page7" class="btn btn-danger btn-big-top-margin hidden" id="yesIAm">La suite</a>
         </div>
@@ -584,9 +584,7 @@
             Prenons un exemple : le <b>trafic routier</b>.</p>
         <p>L'automate <a href="line_cell.html?rule184&alea" target="_blank">simple numéro 184</a> peut être utilisé pour
             modéliser le trafic routier. Dans ce cas, un pixel noir est "occupé" par une voiture et un pixel blanc est
-            libre.</p>
-        <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
-        <p>La première ligne correspond à la situation initiale, ici aléatoire. Les règles sont simples:</p>
+            libre. La première ligne correspond à la situation initiale, ici aléatoire. Les règles sont simples:</p>
         <div class="text-center" id="ruleGroup4"></div>
         <script>
             var myRules = rule184;
@@ -621,7 +619,8 @@
                 i++;
             });
         </script>
-        <p>Dans le 1er cadran, une voiture au centre ne peut bouger, elle a un véhicule devant elle. Dans le 2e cadran, elle se déplace et libère la place. Dans le 3e et le 4e, c'est la voiture de derrière qui prend sa place. Etc.</p>
+        <p>Dans le 1er cadran, une voiture au centre ne peut bouger, elle a un véhicule devant elle. Dans le 2e cadran, elle se déplace et libère la place. Dans le 3e et le 4e, c'est la voiture de derrière qui prend sa place. Etc. Le résultat est étonnant.</p>
+        <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
         <p>Malgré des règles basiques, des comportements que l'on observe dans le monde réel apparaîssent: des bouchons se forment et des tronçons de route reste libre. On peut pousser assez loin l'étude des embouteillage et du trafic en ville grâce à ce modèle. Si cet exercice sort du cadre de ce cours, vous pouvez par exemple consulter ce <a href="https://wireworld2014.wordpress.com/2014/03/17/un-exemple-dautomate-cellulaire-le-modele-de-nagel-schreckenberg/" target="_blank">court article</a> sur le sujet.</p>
         <div class="text-center">
             <a href="#page8" class="btn btn-danger btn-big-top-margin">Continuer</a>
@@ -668,6 +667,8 @@
     <div class="row main">
         <h2>Les bases</h2>
         <h1>L'automate à deux dimensions</h1>
+        <p>Nous n'allons voir qu'une sorte d'automate à deux dimensions: celui qu'on trouve dans le "jeu de la vie" de Conway (<i>Game of Life</i>, 1970). Comme nous sommes dans un système à deux dimensions, l'état d'un pixel à la génération suivante ne dépend plus seulement de ses voisins de droite et de gauche, mais également ceux en dessus et en dessous de lui, et de leurs voisins de droite et de gauche.</p>
+        <p>La visualisation de cet automate n'est plus en ligne comme précédemment, mais se fait <i>en direct</i>. Les automates cellulaires deviennent ainsi vivants.</p>
         <p></p>
     </div>
 </div>
