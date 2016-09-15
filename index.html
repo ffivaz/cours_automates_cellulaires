@@ -74,14 +74,12 @@
             au rendez-vous.</p>
         <p>Une partie des automates cellulaires que vous testerez s'ouvriront sur une autre page (ou un autre onglet) de
             votre navigateur. Celà vous permet de suivre le cours tout en faisant les exercices à côté.</p>
-        <p>Quelques remerciements s'imposent : aux personnes qui organisent le festival de la formation. Et à Pedro
-            Verruma pour son <a href="http://pmav.eu/stuff/javascript-game-of-life-v3.1.1/">implémentation</a> du jeu de
-            la vie que vous utiliserez dans une partie du cours.</p>
         <p><b>Pendant toute la journée du 16 septembre 2016, entre 9h et 16h, je serai accessible pour des questions via
             email (<a href="mailto:fabien.fivaz@unine.ch">fabien.fivaz@unine.ch</a>) ou via twitter (<a
                     href="https://twitter.com/ffivaz">@ffivaz</a>).</b></p>
+        <p><b>Suivant la taille de votre écran, vous devez parfois défiler le texte pour voir le bouton qui vous permet de passer à la page suivant.</b></p>
         <div class="text-center">
-            <a href="#page1" class="btn btn-danger btn-big-top-margin">Commencer le cours</a>
+            <a href="#page1" class="btn btn-danger">Commencer le cours</a>
         </div>
     </div>
 </div>
@@ -117,7 +115,7 @@
             seulement de son propre état à la génération précédente, mais également de celui de ses <b>voisins</b>.</p>
 
         <div class="text-center">
-            <a href="#page2" class="btn btn-danger btn-big-top-margin">Aller au quiz</a>
+            <a href="#page2" class="btn btn-danger">Aller au quiz</a>
         </div>
     </div>
 </div>
@@ -167,7 +165,7 @@
                                                                                        type="radio"></li>
         </ul>
         <div class="text-center">
-            <button class="btn btn-danger btn-big-top-margin" id="response">Répondre</button>
+            <button class="btn btn-danger" id="response">Répondre</button>
             <br>
             <div class="reponse hidden">C'est un automate tellement simple que certains estiment que ce n'en est pas un.
                 A la
@@ -199,8 +197,8 @@
             génération précédente et de celui de son voisin de gauche, et de droite.</p>
         <p>Une manière simple de noter les règles est représentée ci-dessous. Pour couvrir toutes les permutations
             possibles pour trois pixels pouvant chacun prendre deux formes, il y a 8 possibilités. Donc par exemple pour
-            le premier cadran, si les trois pixels de la génération t<sub>1</sub> sont noirs, le pixel observé - celui
-            du centre - sera noir à la génération t<sub>2</sub>.</p>
+            le premier cadran, si les trois pixels de la première génération sont noirs, le pixel observé - celui
+            du centre - sera noir à la deuxième génération.</p>
         <p id="ruleGroup1" class="text-center" style="margin-top: 30px;">
         </p>
         <p>Il reste ensuite à déplacer sur la ligne un cadre imaginaire de 3 pixels et de reporter la valeur du code
@@ -269,7 +267,7 @@
 
         </script>
         <div class="text-center">
-            <a href="#page4" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page4" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -405,7 +403,7 @@
         <p>Voilà donc notre premier automate cellulaire. Pour rappel, chaque ligne correspond à une génération. Selon la
             notation de Wolfram (2002), ce automate cellulaire est appelé <b>règle 254</b>.</p>
         <div class="text-center">
-            <a href="#page5" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page5" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -532,7 +530,7 @@
             change d'échelle, <a href="https://commons.wikimedia.org/wiki/File:Sierpinski_triangle.svg" target="_blank">voyez
                 ici</a>. C'est un triangle de Sierpinski.</p>
         <div class="text-center">
-            <a href="#page6" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page6" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -562,13 +560,13 @@
             <a href="#page7" class="btn btn-danger btn-big-top-margin hidden" id="yesIAm">La suite</a>
         </div>
         <div class="text-center">
-            <button class="btn btn-danger btn-big-top-margin" id="areYouSure">Continuer</button>
+            <button class="btn btn-danger" id="areYouSure">Continuer</button>
         </div>
         <script>
             var ays = document.getElementById('areYouSure');
             ays.addEventListener('click', function () {
                 document.getElementById('texteCache').className = '';
-                document.getElementById('yesIAm').className = 'btn btn-danger btn-big-top-margin';
+                document.getElementById('yesIAm').className = 'btn btn-danger';
                 document.getElementById('areYouSure').className += ' hidden';
             });
         </script>
@@ -625,13 +623,13 @@
             Etc. Le résultat est étonnant.</p>
         <p class="text-center"><img src="images/rule184_example.png" width="555"></p>
         <p>Malgré des règles basiques, des comportements que l'on observe dans le monde réel apparaîssent: des bouchons
-            se forment et des tronçons de route reste libre. On peut pousser assez loin l'étude des embouteillage et du
+            se forment et des tronçons de route restent libres. On peut pousser assez loin l'étude des embouteillage et du
             trafic en ville grâce à ce modèle. Si cet exercice sort du cadre de ce cours, vous pouvez par exemple
             consulter ce <a
                     href="https://wireworld2014.wordpress.com/2014/03/17/un-exemple-dautomate-cellulaire-le-modele-de-nagel-schreckenberg/"
                     target="_blank">court article</a> sur le sujet.</p>
         <div class="text-center">
-            <a href="#page8" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page8" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -653,7 +651,7 @@
                                                 type="radio"></li>
         </ul>
         <div class="text-center">
-            <button class="btn btn-danger btn-big-top-margin" id="response2">Répondre</button>
+            <button class="btn btn-danger" id="response2">Répondre</button>
             <br>
             <div class="reponse2 hidden"><br>
                 <a href="#page9" id="linkToPage9">Passons aux choses sérieuses</a>
@@ -695,7 +693,7 @@
             <li>Une cellule morte, qui a exactement 3 voisins, devient vivante (reproduction).</li>
         </ul>
         <div class="text-center">
-            <a href="#page10" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page10" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -710,7 +708,7 @@
             << </a></p>
         <p>Vous pouvez choisir votre motif de départ dans la liste déroulante et voir évoluer le système.</p>
         <div class="text-center">
-            <a href="#page11" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page11" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -722,7 +720,7 @@
         <p>Comme vous avez pu les tester, voici quelques explications sur les motifs observés. En fait, on distingue un certain nombre de structures:</p>
         <ul>
             <li><a href="game_of_life.html?bloc" target="_blank">bloc</a> - Le bloc est la <b>structure stable</b> la plus petite.</li>
-            <li><a href="game_of_life.html?blinker" target="_blank">blinker (<b>oscillateur</b>)</a> - il existe un grand nombre de structures qui se oscillent (une centaine). Le blinker est la plus simple.</li>
+            <li><a href="game_of_life.html?blinker" target="_blank">blinker (<b>oscillateur</b>)</a> - il existe un grand nombre de structures qui oscillent (une centaine). Le blinker est la plus simple.</li>
             <li><a href="game_of_life.html?toad" target="_blank">toad (grenouille)</a> - C'est un autre oscillateur.</li>
             <li><a href="game_of_life.html?glider" target="_blank">glider</a> - Le glider (Conway l'appelait <i>The ants</i>, les fourmis) est un <b>vaisseau</b>: il de déplacent "indépendamment" jusqu'à rencontrer un obstacle.</li>
             <li><a href="game_of_life.html?acorn" target="_blank">acorn (gland)</a> - est un <b>mathusalem</b>, il met du temps avant de se stabiliser. L'acorn met en fait exactement 5206 générations pour devenir stable. <i>N'essayez pas!</i> Le plateau de jeu n'est pas assez grand pour permettre au motif d'atteindre cet état stable.</li>
@@ -730,7 +728,7 @@
             <li><a href="game_of_life.html?gosper-glider-gun" target="_blank">gosper glider gun</a> - un <b>canon</b> qui envoye un glider (décrit plus haut) de façon répétitive.</li>
         </ul>
         <div class="text-center">
-            <a href="#page12" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page12" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -744,7 +742,7 @@
             << </a></p>
         <p>Vous pouvez ensuite, si vous désirez voir l'immense diversité des structures, d'aller faire un tour sur <a href="https://fr.wikipedia.org/wiki/Jeu_de_la_vie">wikipedia</a>. A partir d'ici, vous êtes libres et tout est possible.</p>
         <div class="text-center">
-            <a href="#page13" class="btn btn-danger btn-big-top-margin">Continuer</a>
+            <a href="#page13" class="btn btn-danger">Continuer</a>
         </div>
     </div>
 </div>
@@ -755,7 +753,10 @@
         <h1>La der</h1>
         <p>Se lancer dans la rédaction d'un cours sur les automates cellulaires n'a finalement pas été si simple. Le domaine est étudié depuis plus de 40 ans, et le nombre d'articles et de possibilités est énorme. Le livre de Wolfram fait ainsi plus de 1000 pages.</p>
         <p>J'espère avoir réussi à vous donner envie d'aller plus loin, ou au moins vous avoir diverti pendant quelques instants. Vous pouvez m'envoyer des commentaires sur le cours à l'adresse <a href="mailto:fabien.fivaz@unine.ch">fabien.fivaz@unine.ch</a> .</p>
+        <p>&nbsp;</p>
         <p class="text-center"><b>Merci encore et bonne journée !</b></p>
+        <p>&nbsp;</p>
+        <p class="text-center">J'aimerais profiter ici pour remercier les organisateurs du festival de la formation.</p>
     </div>
 </div>
 
