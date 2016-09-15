@@ -34,13 +34,13 @@
             </div>
             <div>
                 <select id="patternList" title="Choix du motif de départ">
-                    <option name="glyder">glyder</option>
+                    <option name="glider">glider</option>
                     <option name="random">random</option>
                     <option name="blinker">blinker</option>
                     <option name="acorn">acorn</option>
                     <option name="eight-in-line">eight-in-line</option>
                     <option name="toad">toad</option>
-                </select><br>
+                </select>
                 <button class="btn btn-success" id="startBtn" style="margin: 20px;">Start</button>
                 <br>
                 <button class="btn btn-warning" id="reset" style="margin: 20px;">Reset</button>
@@ -208,26 +208,7 @@
 
     var myCells = createArray();
     var initPattern = 'glider';
-    switch (location.search) {
-        case '?glider':
-            initPattern = 'glider';
-            break;
-        case '?acorn':
-            initPattern = 'acorn';
-            break;
-        case '?random':
-            initPattern = 'random';
-            break;
-        case '?blinker':
-            initPattern = 'blinker';
-            break;
-        case '?toad':
-            initPattern = 'toad';
-            break;
-        case '?eight_in_line':
-            initPattern = 'eight_in_line';
-            break;
-    }
+    initPattern = location.search.substring(1); // If there is an URL parameter, initial pattern gets
 
     init(initPattern); // There you can choose the initial pattern: acorn, eight-in-line, blinker, etc.
 
